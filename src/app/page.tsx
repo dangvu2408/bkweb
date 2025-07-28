@@ -5,7 +5,7 @@ import Noti from "@/components/ui/notification";
 
 export default function Home() {
     return (
-        <div className="flex w-full min-w-[768px] h-screen bg-white">
+        <div className="flex w-full min-w-[768px] bg-white">
             <Header/>
             <Sidebar/>
             <div className="flex-grow relative min-h-full" style={{ width: "calc(100% - 570px)" }}>
@@ -18,6 +18,5 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    
     );
 }
