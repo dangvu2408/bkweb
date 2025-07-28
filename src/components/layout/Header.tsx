@@ -18,7 +18,7 @@ export default function Header() {
                 </div>
 
                 <div className="flex items-center justify-end flex-grow mr-[10px] basis-auto shrink-0">
-
+                    <a className="mr-[12px] px-[25px] py-[10px] rounded-full bg-red-600 text-white text-[14px] font-bold leading-[20px] tracking-[0.1px] cursor-pointer">Đăng nhập</a>
                 </div>
             </div>
         </header>
