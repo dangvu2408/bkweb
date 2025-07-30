@@ -38,12 +38,6 @@ interface StudentInfo {
 export default function StudentInfo() {
     const [studentInfo, setInfo] = useState<any>(null);
 
-    useEffect(() => {
-        const stored = localStorage.getItem('studentInfo');
-        if (stored) {
-            setInfo(JSON.parse(stored));
-        }
-    }, []);
 
     if (!studentInfo) return <p>Đang tải thông tin sinh viên...</p>;
 
