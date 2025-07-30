@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Sidebar() {
     return (
         <aside className="relative z-[100] w-[240px] bg-[rgba(0,0,0,0.05)] h-full min-h-screen">
@@ -17,10 +19,10 @@ export default function Sidebar() {
                     <nav className="w-full relative mb-4">
                         <ul>
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Thông tin sinh viên" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                                <Link href="/student-info" title="Thông tin sinh viên" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" aria-labelledby="personIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000"> <title id="personIconTitle">Person</title> <path d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20"/> </svg>
                                     <span>Thông tin sinh viên</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">

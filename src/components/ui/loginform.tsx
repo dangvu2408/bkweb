@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 
 export default function loginform() {
     const [username, setUsername] = useState('');
@@ -12,6 +14,8 @@ export default function loginform() {
     const [cookies, setCookies] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const router = useRouter();
+
 
     const fetchCaptcha = async () => {
         setLoading(true);
@@ -48,15 +52,18 @@ export default function loginform() {
             }),
         });
 
+
         const data = await res.json();
         setLoading(false);
         setMessage(data.message);
 
         if (data.success) {
-            alert('Đăng nhập thành công!');
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            localStorage.setItem('studentInfo', JSON.stringify(data.data));
+            router.push('/student-info')
         } else {
             fetchCaptcha();
-            alert(data.message || 'Đăng nhập thất bại!');
         }
     };
 
