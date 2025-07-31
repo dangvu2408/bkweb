@@ -52,7 +52,6 @@ export async function encryptPassword(username: string, password: string) {
 
         return encrypted;
     } catch (err) {
-        console.error("DES encrypt error:", err);
         return null;
     }
 }
@@ -84,7 +83,7 @@ export async function GET() {
     });
 
     const captchaBase64 = `data:image/jpeg;base64,${Buffer.from(captchaResp.data).toString('base64')}`;
-    
+
     return NextResponse.json({
         captchaUrl: captchaBase64,
         hiddenFields: {
@@ -142,21 +141,78 @@ export async function POST(req: NextRequest) {
         formData.append('DXCss', string00);
 
         const res = await client.post(LOGIN_URL, formData.toString(), {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent': 'Mozilla/5.0',
-            'Referer': LOGIN_URL,
-            'Origin': 'https://ctt-sis.hust.edu.vn',
-        },
-        maxRedirects: 0,
-        validateStatus: () => true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'User-Agent': 'Mozilla/5.0',
+                'Referer': LOGIN_URL,
+                'Origin': 'https://ctt-sis.hust.edu.vn',
+            },
+            maxRedirects: 0,
+            validateStatus: () => true,
         });
 
         const location = res.headers['location'] || '';
-        if (res.status === 302 && location.includes('default.aspx')) {
-        return NextResponse.json({ success: true });
+        if (res.status === 302 && (location === '/' || location.includes('default.aspx'))) {
+            const homeRes = await client.get('https://ctt-sis.hust.edu.vn/', {
+                responseType: 'arraybuffer',
+            });
+            
+            const htmlUtf8 = Buffer.from(homeRes.data).toString('utf-8');
+            const $ = cheerio.load(htmlUtf8);
+
+            const getText = (id: string) => $(`#${id}`).text().trim();
+            const text1 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo1').split(':');
+            const text2 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo2').split(':');
+            const text5 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo5').split(':');
+            const text6 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo6').split(':');
+
+            const data = {
+                MSSV: getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbMSSV').substring(5),
+
+                Ho_ten: text1[1]?.trim().substring(0, text1[1].length - 16),
+                Nam_vao_truong: text1[2]?.trim().substring(0, text1[2].length - 13),
+                Bac_dao_tao: text1[3]?.trim().substring(0, text1[3].length - 14),
+                Chuong_trinh: text1[4]?.trim().substring(0, text1[4].length - 19),
+                Khoa_vien: text1[5]?.trim().substring(0, text1[5].length - 20),
+                Tinh_trang: text1[6]?.trim().substring(0),
+
+                Gioi_tinh: text2[1]?.trim().substring(0, text2[1].length - 5),
+                Lop: text2[2]?.trim().substring(0, text2[2].length - 10),
+                Khoa: text2[3]?.trim().substring(0, text2[3].length - 7),
+                Email: text2[4]?.trim(),
+
+                Dan_toc: text5[1]?.trim().substring(0, text5[1].length - 14),
+                Nam_tot_nghiep_c3: text5[2]?.trim().substring(0, text5[2].length - 9),
+                Dia_chi: text5[3]?.trim().substring(0, text5[3].length - 11),
+                CCCD: text5[4]?.trim().substring(0, text5[4].length - 9),
+                Noi_cap: text5[5]?.trim().substring(0, text5[5].length - 11),
+                Ho_ten_bo: text5[6]?.trim().substring(0, text5[6].length - 10),
+                Nam_sinh_bo: text5[7]?.trim().substring(0, text5[7].length - 13),
+                Nghe_nghiep_bo: text5[8]?.trim().substring(0, text5[8].length - 12),
+                SDT_bo: text5[9]?.trim().substring(0, text5[9].length - 7),
+                Email_bo: text5[10]?.trim(),
+
+                Ton_giao: text6[1]?.trim().substring(0, text6[1].length - 13),
+                Truong_THPT: text6[2]?.trim().substring(0, text6[2].length - 9),
+                Ho_khau: text6[3]?.trim().substring(0, text6[3].length - 16),
+                SDT: text6[4]?.trim().substring(0, text6[4].length - 11),
+                Ho_ten_me: text6[5]?.trim().substring(0, text6[5].length - 10),
+                Nam_sinh_me: text6[6]?.trim().substring(0, text6[6].length - 13),
+                Nghe_nghiep_me: text6[7]?.trim().substring(0, text6[7].length - 12),
+                SDT_me: text6[8]?.trim().substring(0, text6[8].length - 7),
+                Email_me: text6[9]?.trim(),
+            };
+
+            return new NextResponse(
+                JSON.stringify({ success: true, data }),
+                {
+                    status: 200,
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                    },
+                }
+            );
         }
     }
-
     return NextResponse.json({ success: false, message: 'Đăng nhập thất bại' }, { status: 401 });
 }

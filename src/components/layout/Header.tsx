@@ -1,4 +1,20 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface User {
+    Ho_ten: string;
+    MSSV: string;
+}
+
 export default function Header() {
+    const [user, setUser] = useState<User | null>(null);
+    useEffect(() => {
+        const userData = localStorage.getItem("studentInfo");
+        if (userData) {
+            setUser(JSON.parse(userData));
+        }
+    }, []);
     return (
         <header className="flex items-center fixed top-0 right-0 h-[70px] px-[60px] z-[100] min-w-[660px] left-[240px]">
             <div className="flex items-center justify-between relative z-[1] w-full">
@@ -18,7 +34,14 @@ export default function Header() {
                 </div>
 
                 <div className="flex items-center justify-end flex-grow mr-[10px] basis-auto shrink-0">
-                    <a className="mr-[12px] px-[25px] py-[10px] rounded-full bg-red-600 text-white text-[14px] font-bold leading-[20px] tracking-[0.1px] cursor-pointer">Đăng nhập</a>
+                    {user ? (
+                        <strong className="text-[#000]">
+                            {user.Ho_ten} - {user.MSSV}
+                        </strong>
+                    ) : (
+                        <a className="mr-[12px] px-[25px] py-[10px] rounded-full bg-red-600 text-white text-[14px] font-bold leading-[20px] tracking-[0.1px] cursor-pointer">Đăng nhập</a>
+                    )}
+                    
                 </div>
             </div>
         </header>

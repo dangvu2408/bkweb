@@ -25,7 +25,6 @@ export default function LoginForm() {
         try {
             const res = await fetch('/api/login');
             const data = await res.json();
-            console.log("data", data);
             setCaptchaUrl(data.captchaUrl);
             setHiddenFields(data.hiddenFields);
             setSessionId(data.sessionId);
@@ -37,8 +36,6 @@ export default function LoginForm() {
             setLoading(false);
         }
     };
-
-    console.log(captchaUrl);
 
     useEffect(() => {
         fetchCaptcha();
