@@ -4,7 +4,8 @@ import { CookieJar } from 'tough-cookie';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-const STUDENTCLASS_URL = 'https://ctt-sis.hust.edu.vn/Students/StudentGroupInfo.aspx';
+const STUDENT_SCORE_URL = 'https://ctt-sis.hust.edu.vn/Students/StudentCourseMarks.aspx';
+
 declare global {
     var sessionStore: Record<string, { jar: CookieJar }>;
 }
@@ -22,28 +23,28 @@ export async function POST(req: NextRequest) {
 
         const client = wrapper(axios.create({ jar }));
 
-        const response = await client.get(STUDENTCLASS_URL, {
+        const response = await client.get(STUDENT_SCORE_URL, {
             responseType: 'arraybuffer',
         });
 
         const html = Buffer.from(response.data).toString('utf-8');
         const $ = cheerio.load(html);
 
-        const rows = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_gvStudents_DXMainTable .dxgvDataRow');
+        const rows = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_gvCourseMarks .dxgvDataRow');
         const studentclass: any[] = [];
 
         rows.each((_, row) => {
             const columns = $(row).find('td.dx-nowrap');
 
             studentclass.push({
-                maSV: $(columns[0]).text().trim(),
-                hoSV: $(columns[1]).text().trim(),
-                demSV: $(columns[2]).text().trim(),
-                tenSV: $(columns[3]).text().trim(),
-                ngaysinh: $(columns[4]).text().trim(),
-                tenlop: $(columns[5]).text().trim(),
-                ctdt: $(columns[6]).text().trim(),
-                trangthai: $(columns[7]).text().trim(),
+                HocKi: $(columns[0]).text().trim(),
+                MaHocPhan: $(columns[1]).text().trim(),
+                TenHocPhan: $(columns[2]).text().trim(),
+                TinChi: $(columns[3]).text().trim(),
+                LopHoc: $(columns[4]).text().trim(),
+                diemQT: $(columns[5]).text().trim(),
+                diemThi: $(columns[6]).text().trim(),
+                diemChu: $(columns[7]).text().trim(),
             });
         });
 

@@ -4,7 +4,7 @@ import { CookieJar } from 'tough-cookie';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-const STUDENTCLASS_URL = 'https://ctt-sis.hust.edu.vn/Students/StudentGroupInfo.aspx';
+const TOEIC_URL = 'https://ctt-sis.hust.edu.vn/Students/ToeicMarks.aspx';
 declare global {
     var sessionStore: Record<string, { jar: CookieJar }>;
 }
@@ -22,14 +22,14 @@ export async function POST(req: NextRequest) {
 
         const client = wrapper(axios.create({ jar }));
 
-        const response = await client.get(STUDENTCLASS_URL, {
+        const response = await client.get(TOEIC_URL, {
             responseType: 'arraybuffer',
         });
 
         const html = Buffer.from(response.data).toString('utf-8');
         const $ = cheerio.load(html);
 
-        const rows = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_gvStudents_DXMainTable .dxgvDataRow');
+        const rows = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_gvStudents .dxgvDataRow');
         const studentclass: any[] = [];
 
         rows.each((_, row) => {
@@ -37,13 +37,16 @@ export async function POST(req: NextRequest) {
 
             studentclass.push({
                 maSV: $(columns[0]).text().trim(),
-                hoSV: $(columns[1]).text().trim(),
-                demSV: $(columns[2]).text().trim(),
-                tenSV: $(columns[3]).text().trim(),
-                ngaysinh: $(columns[4]).text().trim(),
-                tenlop: $(columns[5]).text().trim(),
-                ctdt: $(columns[6]).text().trim(),
-                trangthai: $(columns[7]).text().trim(),
+                hotenSV: $(columns[1]).text().trim(),
+                ngaySinh: $(columns[2]).text().trim(),
+                hocKi: $(columns[3]).text().trim(),
+                ghiChu: $(columns[4]).text().trim(),
+                ngayThi: $(columns[5]).text().trim(),
+                diemNghe: $(columns[6]).text().trim(),
+                diemDoc: $(columns[7]).text().trim(),
+                diemViet: $(columns[8]).text().trim(),
+                diemNoi: $(columns[9]).text().trim(),
+                diemTong: $(columns[10]).text().trim(),
             });
         });
 

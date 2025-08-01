@@ -52,8 +52,6 @@ export async function POST(req: NextRequest) {
             });
         });
 
-        console.log("timetable: ", timetable);
-
         return NextResponse.json({ success: true, data: timetable });
     } catch (err) {
         console.error(err);

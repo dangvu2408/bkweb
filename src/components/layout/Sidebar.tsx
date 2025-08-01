@@ -58,10 +58,10 @@ export default function Sidebar() {
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Bảng điểm học phần" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                                <Link href="/student-score" title="Bảng điểm học phần" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="tableVerticalIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="tableVerticalIconTitle">Data table</title> <rect x="3" y="2" width="18" height="20"/> <line x1="12" y1="2" x2="12" y2="22"/> <line x1="21" y1="7" x2="3" y2="7"/> <line x1="21" y1="17" x2="3" y2="17"/> <line x1="21" y1="12" x2="3" y2="12"/> </svg>
                                     <span>Bảng điểm học phần</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
@@ -72,10 +72,10 @@ export default function Sidebar() {
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Điểm thi TOEIC" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                                <Link href="/toeic-score" title="Điểm thi TOEIC" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" aria-labelledby="languageIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="languageIconTitle">Language</title> <circle cx="12" cy="12" r="10"/> <path strokeLinecap="round" d="M12,22 C14.6666667,19.5757576 16,16.2424242 16,12 C16,7.75757576 14.6666667,4.42424242 12,2 C9.33333333,4.42424242 8,7.75757576 8,12 C8,16.2424242 9.33333333,19.5757576 12,22 Z"/> <path strokeLinecap="round" d="M2.5 9L21.5 9M2.5 15L21.5 15"/> </svg>
                                     <span>Điểm thi TOEIC</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
