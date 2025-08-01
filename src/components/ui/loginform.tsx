@@ -66,7 +66,7 @@ export default function LoginForm() {
                 sessionId, 
             })
         });
-
+        
         const data = await res.json();
         setLoading(false);
         setMessage(data.message || '');
@@ -75,6 +75,7 @@ export default function LoginForm() {
             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
             localStorage.setItem('studentInfo', JSON.stringify(data.data));
+            localStorage.setItem('sessionId', data.sessionId);
             router.push('/student-info');
         } else {
             fetchCaptcha();

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+
 interface User {
     Ho_ten: string;
     MSSV: string;
@@ -16,7 +17,7 @@ export default function Header() {
         }
     }, []);
     return (
-        <header className="flex items-center fixed top-0 right-0 h-[70px] px-[60px] z-[100] min-w-[660px] left-[240px]">
+        <header className="flex items-center fixed top-0 right-0 h-[70px] px-[60px] z-[100] min-w-[660px] left-[240px] [font-family:'Poppin']">
             <div className="flex items-center justify-between relative z-[1] w-full">
                 <div className="flex items-center justify-start flex-grow mr-[10px] basis-auto shrink-0">
                     <form className="relative w-full max-w-[440px]">
@@ -35,11 +36,11 @@ export default function Header() {
 
                 <div className="flex items-center justify-end flex-grow mr-[10px] basis-auto shrink-0">
                     {user ? (
-                        <strong className="text-[#000]">
+                        <p className="text-[#000] [font-family:'Poppin_Bold']">
                             {user.Ho_ten} - {user.MSSV}
-                        </strong>
+                        </p>
                     ) : (
-                        <a className="mr-[12px] px-[25px] py-[10px] rounded-full bg-red-600 text-white text-[14px] font-bold leading-[20px] tracking-[0.1px] cursor-pointer">Đăng nhập</a>
+                        <a className="mr-[12px] px-[25px] py-[10px] rounded-full bg-red-600 text-white text-[14px] [font-family:'Poppin_Bold'] leading-[20px] tracking-[0.1px] cursor-pointer">Đăng nhập</a>
                     )}
                     
                 </div>

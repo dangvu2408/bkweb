@@ -8,7 +8,11 @@ import { randomUUID } from 'crypto';
 import crypto from 'crypto';
 
 const LOGIN_URL = 'https://ctt-sis.hust.edu.vn/Account/Login.aspx';
-const sessionStore: Record<string, { jar: CookieJar }> = {};
+declare global {
+    var sessionStore: Record<string, { jar: CookieJar }>;
+}
+globalThis.sessionStore = globalThis.sessionStore || {};
+
 
 function maHoaMD5(str: string): string {
     return crypto.createHash('md5').update(Buffer.from(str, 'utf-8')).digest('hex');
@@ -59,7 +63,7 @@ export async function encryptPassword(username: string, password: string) {
 export async function GET() {
     const sessionId = randomUUID();
     const jar = new CookieJar();
-    sessionStore[sessionId] = { jar };
+    globalThis.sessionStore[sessionId] = { jar };
 
     const client = wrapper(axios.create({ jar }));
     const { data: pageBuffer } = await client.get(LOGIN_URL, {
@@ -83,7 +87,7 @@ export async function GET() {
     });
 
     const captchaBase64 = `data:image/jpeg;base64,${Buffer.from(captchaResp.data).toString('base64')}`;
-
+    
     return NextResponse.json({
         captchaUrl: captchaBase64,
         hiddenFields: {
@@ -150,7 +154,7 @@ export async function POST(req: NextRequest) {
             maxRedirects: 0,
             validateStatus: () => true,
         });
-
+        
         const location = res.headers['location'] || '';
         if (res.status === 302 && (location === '/' || location.includes('default.aspx'))) {
             const homeRes = await client.get('https://ctt-sis.hust.edu.vn/', {
@@ -204,7 +208,7 @@ export async function POST(req: NextRequest) {
             };
 
             return new NextResponse(
-                JSON.stringify({ success: true, data }),
+                JSON.stringify({ success: true, sessionId, data }),
                 {
                     status: 200,
                     headers: {

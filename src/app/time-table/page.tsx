@@ -1,9 +1,11 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import StudentInfo from "@/components/ui/studentinfo";
+import Timetable from "@/components/ui/timetable";
 
-export default function Home() {
+export default function TimetablePage() {
     return (
         <div className="flex w-full min-w-[768px] bg-white">
             <Header/>
@@ -12,11 +14,12 @@ export default function Home() {
                 <div className="relative overflow-hidden w-full h-full">
                     <main className="absolute inset-0 overflow-y-scroll overflow-x-hidden -mr-[6px] mb-0 px-[60px] mx-auto">
                         <div className="h-full mt-[85px] flex">
-                            <StudentInfo></StudentInfo>
+                            <Timetable></Timetable>
                         </div>
                     </main>
                 </div>
             </div>
         </div>
+        
     );
 }
