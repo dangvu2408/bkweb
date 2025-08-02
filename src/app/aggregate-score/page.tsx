@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import StudentScore from "@/components/ui/studentscore";
+import StudentGPACPA from "@/components/ui/studentgpacpa";
 
-export default function StudentScorePage() {
+export default function StudentCPAGPA() {
     return (
         <div className="flex w-full min-w-[768px] bg-white">
             <Header/>
@@ -14,7 +14,7 @@ export default function StudentScorePage() {
                 <div className="relative overflow-hidden w-full h-full">
                     <main className="absolute inset-0 overflow-y-scroll overflow-x-hidden -mr-[6px] mb-0 px-[60px] mx-auto">
                         <div className="h-full mt-[85px] flex">
-                            <StudentScore></StudentScore>
+                            <StudentGPACPA></StudentGPACPA>
                         </div>
                     </main>
                 </div>

@@ -65,10 +65,10 @@ export default function Sidebar() {
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Điểm tổng hợp" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                                <Link href="/aggregate-score" title="Điểm tổng hợp" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="tableHorizontalIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="tableHorizontalIconTitle">Data table</title> <path d="M22 4V19H2L2 4L22 4Z"/> <line x1="22" y1="9" x2="2" y2="9"/> <line x1="22" y1="14" x2="2" y2="14"/> <path d="M12 19L12 4"/> </svg>
                                     <span>Điểm tổng hợp</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] border-l-transparent hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
