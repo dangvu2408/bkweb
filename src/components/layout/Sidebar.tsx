@@ -48,11 +48,11 @@ export default function Sidebar() {
                     <div className="relative h-px border-t border-t-[rgba(0,0,0,0.1)] m-[0px_21px_21px_21px]"></div>
                     <nav className="w-full relative mb-4 overflow-hidden h-full">
                         <ul>
-                            <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Chương trình đào tạo" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                            <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/program')}`}>
+                                <Link href="/program" title="Chương trình đào tạo" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" aria-labelledby="dashboardIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="dashboardIconTitle">Dashboard</title> <rect width="20" height="20" x="2" y="2"/> <path d="M11 7L17 7M11 12L17 12M11 17L17 17"/> <line x1="7" y1="7" x2="7" y2="7"/> <line x1="7" y1="12" x2="7" y2="12"/> <line x1="7" y1="17" x2="7" y2="17"/> </svg>
                                     <span>Chương trình đào tạo</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/time-table')}`}>
