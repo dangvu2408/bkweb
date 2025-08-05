@@ -65,7 +65,7 @@ export default function Sidebar() {
                             <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
                                 <a title="Thời khóa biểu tạm thời" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="calendarEventIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="calendarEventIconTitle">Calendar event</title> <path d="M3 5H21V21H3V5Z"/> <path d="M21 9H3"/> <path d="M7 5V3"/> <path d="M17 5V3"/> <rect x="15" y="15" width="2" height="2"/> </svg>
-                                    <span>Thời khóa biểu tạm thời</span>
+                                    <span>Đăng kí học phần</span>
                                 </a>
                             </li>
 
@@ -90,11 +90,11 @@ export default function Sidebar() {
                                 </Link>
                             </li>
 
-                            <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Điểm kỳ học mới nhất" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                            <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/input-grade-term')}`}>
+                                <Link href="/input-grade-term" title="Điểm kỳ học mới nhất" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="inboxAltIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="inboxAltIconTitle">Inbox</title> <path d="M3 13H9V16H15V13H21"/> <path fillRule="evenodd" clipRule="evenodd" d="M3 13L5 4H19L21 13V20H3V13Z"/> <path d="M7 7H17"/> <path d="M6.5 10H17.5"/> </svg>
                                     <span>Điểm kỳ học mới nhất</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
@@ -115,11 +115,11 @@ export default function Sidebar() {
                                 </Link>
                             </li>
 
-                            <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Bản đồ Bách khoa" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                            <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/bk-map')}`}>
+                                <Link href="/bk-map" title="Bản đồ Bách khoa" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" aria-labelledby="mapIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="mapIconTitle">Map</title> <polygon points="9 19 3 21 3 5 9 3 15 5 21 3 21 18.5 15 21"/> <path strokeLinecap="round" d="M15 5L15 21M9 3L9 19"/> </svg>
                                     <span>Bản đồ Bách khoa</span>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>

@@ -45,43 +45,33 @@ export default function StudentGPACPA() {
     return (
 
         <div className="w-full flex flex-col gap-[10px] text-[#32323d] pb-[10px]">
-            <h1 className="[font-family:'Poppin_Bold'] mb-2 text-center text-2xl">BẢNG ĐIỂM HỌC PHẦN</h1>
+            <h1 className="[font-family:'Poppin_Bold'] mb-2 text-center text-2xl">BẢNG ĐIỂM TỔNG HỢP</h1>
             <table className="min-w-full border border-gray-300 text-sm">
                 <thead className="bg-[#E0ECFF]">
-                <tr>
-                    <th className="border px-2 py-1">Học kì</th>
-                    <th className="border px-2 py-1">GPA</th>
-                    <th className="border px-2 py-1">CPA</th>
-                    <th className="border px-2 py-1">Tín chỉ qua</th>
-                    <th className="border px-2 py-1">Tín chỉ tích lũy</th>
-                    <th className="border px-2 py-1">Tín chỉ nợ</th>
-                    <th className="border px-2 py-1">Tín chỉ đăng ký</th>
-                    <th className="border px-2 py-1">Trình độ</th>
-                    <th className="border px-2 py-1">Cảnh báo</th>
-                    <th className="border px-2 py-1">Thiếu điểm</th>
-                    <th className="border px-2 py-1">Không tính</th>
-                    <th className="border px-2 py-1">CTDT</th>
-                    <th className="border px-2 py-1">Dự kiến XLHT</th>
-                    <th className="border px-2 py-1">Xử lý chính thức</th>
-                </tr>
+                    <tr>
+                        <th className="border px-2 py-1">Học kì</th>
+                        <th className="border px-2 py-1">GPA</th>
+                        <th className="border px-2 py-1">CPA</th>
+                        <th className="border px-2 py-1">Tín chỉ qua</th>
+                        <th className="border px-2 py-1">Tín chỉ tích lũy</th>
+                        <th className="border px-2 py-1">Tín chỉ nợ</th>
+                        <th className="border px-2 py-1">Tín chỉ đăng ký</th>
+                        <th className="border px-2 py-1">Trình độ</th>
+                        <th className="border px-2 py-1">Cảnh báo</th>
+                    </tr>
                 </thead>
                 <tbody>
                 {data.map((stdcpagpa, idx) => (
                     <tr key={idx}>
-                    <td className="border px-2 py-1">{stdcpagpa.hockihoc}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.gpa}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.cpa}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.tinchiqua}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.tinchitichluy}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.tinchino}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.tinchidk}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.trinhdo}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.canhbao}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.thieudiem}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.khongtinh}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.ctdtsv}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.dukienxlht}</td>
-                    <td className="border px-2 py-1">{stdcpagpa.xulichinhthuc}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.hockihoc}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.gpa}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.cpa}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.tinchiqua}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.tinchitichluy}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.tinchino}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.tinchidk}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.trinhdo}</td>
+                        <td className="border px-2 py-1">{stdcpagpa.canhbao}</td>
                     </tr>
                 ))}
                 </tbody>

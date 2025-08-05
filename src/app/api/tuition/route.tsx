@@ -29,6 +29,10 @@ export async function POST(req: NextRequest) {
         const html = Buffer.from(htmlBuffer).toString('utf-8');
         const $ = cheerio.load(html);
 
+        if (html.includes('ctl00_ctl00_contentPane_MainPanel_MainContent_tbUserName_I') || html.includes('ctl00_ctl00_contentPane_MainPanel_MainContent_tbPassword_I')) {
+            return NextResponse.json({ success: false, message: 'Session hết hạn' }, { status: 401 });
+        }
+
         const table = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_rpEditTables_ASPxCallbackPanel1_gvCourseRegister');
         const note = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_rpEditTables_ASPxCallbackPanel1_TuitionInfo');
 
