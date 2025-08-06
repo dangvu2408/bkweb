@@ -21,6 +21,16 @@ export default function StudentClass() {
         const sessionId = localStorage.getItem('sessionId');
         if (!sessionId) return;
 
+        const cached = localStorage.getItem('class_cache');
+        if (cached) {
+            const { data, time } = JSON.parse(cached);
+            if (Date.now() - time < 10 * 60 * 1000) {
+                setData(data);
+                setLoading(false);
+                return;
+            }
+        }
+
         fetch('/api/studentclass', {
             method: 'POST',
             body: JSON.stringify({ sessionId }),
@@ -28,7 +38,15 @@ export default function StudentClass() {
         })
             .then((res) => res.json())
             .then((json) => {
-                if (json.success) setData(json.data);
+                if (json.success) {
+                    setData(json.data);
+                    localStorage.setItem('class_cache', JSON.stringify({
+                        data: json.data,
+                        time: Date.now()
+                    }));
+                } else {
+                    console.error('API trả về lỗi:', json.message);
+                }
             })
             .catch((err) => console.error('Lỗi lấy lớp:', err))
             .finally(() => setLoading(false));

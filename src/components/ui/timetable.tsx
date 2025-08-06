@@ -26,6 +26,16 @@ export default function Timetable() {
         const sessionId = localStorage.getItem('sessionId');
         if (!sessionId) return;
 
+        const cached = localStorage.getItem('timetable_cache');
+        if (cached) {
+            const { data, time } = JSON.parse(cached);
+            if (Date.now() - time < 10 * 60 * 1000) {
+                setData(data);
+                setLoading(false);
+                return;
+            }
+        }
+
         fetch('/api/timetable', {
             method: 'POST',
             body: JSON.stringify({ sessionId }),
@@ -33,9 +43,17 @@ export default function Timetable() {
         })
             .then((res) => res.json())
             .then((json) => {
-                if (json.success) setData(json.data);
+                if (json.success) {
+                    setData(json.data);
+                    localStorage.setItem('term_cache', JSON.stringify({
+                        data: json.data,
+                        time: Date.now()
+                    }));
+                } else {
+                    console.error('API trả về lỗi:', json.message);
+                }
             })
-            .catch((err) => console.error('Lỗi lấy TKB:', err))
+            .catch((err) => console.error('Lỗi:', err))
             .finally(() => setLoading(false));
     }, []);
 
