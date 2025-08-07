@@ -62,11 +62,11 @@ export default function Sidebar() {
                                 </Link>
                             </li>
 
-                            <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Thời khóa biểu tạm thời" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                            <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/course-register')}`}>
+                                <Link href="/course-register" title="Thời khóa biểu tạm thời" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="calendarEventIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="calendarEventIconTitle">Calendar event</title> <path d="M3 5H21V21H3V5Z"/> <path d="M21 9H3"/> <path d="M7 5V3"/> <path d="M17 5V3"/> <rect x="15" y="15" width="2" height="2"/> </svg>
                                     <span>Đăng kí học phần</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/student-score')}`}>

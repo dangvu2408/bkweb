@@ -1,6 +1,9 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import {
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+} from 'recharts';
 
 interface StudentGPACPA {
     hockihoc: string;
@@ -94,6 +97,49 @@ export default function StudentGPACPA() {
                 ))}
                 </tbody>
             </table>
+
+            {data.length > 0 && (
+                <div className="flex flex-wrap gap-4 mt-4">
+                    <div className="w-full md:w-[48%]">
+                        <h2 className="text-center [font-family:'Poppin_Bold'] text-lg mb-2">GPA</h2>
+                        <div className="w-full h-[300px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={data.reverse().map(d => ({
+                                    term: d.hockihoc,
+                                    GPA: parseFloat(d.gpa),
+                                }))}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="term" />
+                                    <YAxis domain={[0, 4]} tickCount={9} />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="GPA" stroke="#d32f2f" dot strokeWidth={2} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                        </div>
+
+                        <div className="w-full md:w-[48%]">
+                        <h2 className="text-center [font-family:'Poppin_Bold'] text-lg mb-2">CPA</h2>
+                        <div className="w-full h-[300px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                            <LineChart data={data.map(d => ({
+                                term: d.hockihoc,
+                                CPA: parseFloat(d.cpa),
+                            }))}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="term" />
+                                <YAxis domain={[0, 4]} tickCount={9} />
+                                <Tooltip />
+                                <Legend />
+                                <Line type="monotone" dataKey="CPA" stroke="#1976d2" dot strokeWidth={2} />
+                            </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 
