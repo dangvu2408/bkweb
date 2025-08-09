@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import {
-    BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+    AreaChart, BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Area
 } from 'recharts';
 
 interface StudentGPACPA {
@@ -60,6 +60,7 @@ export default function StudentGPACPA() {
             .catch((err) => console.error('Lỗi lấy:', err))
             .finally(() => setLoading(false));
     }, []);
+    const sortedData = [...data].sort((a, b) => a.hockihoc.localeCompare(b.hockihoc));
 
     if (loading) return <div>Đang tải ...</div>;
 
@@ -98,52 +99,62 @@ export default function StudentGPACPA() {
                 </tbody>
             </table>
 
-            {data.length > 0 && (
+            {sortedData.length > 0 && (
                 <div className='flex flex-col gap-4 mt-6'>
-                    <div className="flex flex-wrap gap-4 mt-4">
-                        <div className="w-full md:w-[48%]">
-                            <h2 className="text-center [font-family:'Poppin_Bold'] text-lg mb-2">GPA</h2>
-                            <div className="w-full h-[300px]">
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <LineChart data={data.reverse().map(d => ({
-                                        term: d.hockihoc,
-                                        GPA: parseFloat(d.gpa),
-                                    }))}>
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="term" />
-                                        <YAxis domain={[0, 4]} tickCount={9} />
-                                        <Tooltip />
-                                        <Legend />
-                                        <Line type="monotone" dataKey="GPA" stroke="#d32f2f" dot strokeWidth={2} />
-                                    </LineChart>
-                                </ResponsiveContainer>
-                            </div>
-                        </div>
+                    <h2 className="text-center [font-family:'Poppin_Bold'] text-lg mb-2">PHÂN TÍCH KẾT QUẢ HỌC TẬP</h2>
 
-                        <div className="w-full md:w-[48%]">
-                            <h2 className="text-center [font-family:'Poppin_Bold'] text-lg mb-2">CPA</h2>
-                            <div className="w-full h-[300px]">
-                                <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={data.reverse().map(d => ({
+                    <div className="flex flex-wrap gap-4">
+                        <div className="w-full md:w-[48%] h-64 bg-white p-4">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={sortedData.map(d => ({
                                     term: d.hockihoc,
-                                    CPA: parseFloat(d.cpa),
+                                    GPA: parseFloat(d.gpa),
                                 }))}>
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <defs>
+                                        <linearGradient id="gpaGradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stopColor="#d32f2f" stopOpacity={0.5} />
+                                            <stop offset="100%" stopColor="#d32f2f" stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" strokeWidth={1.2}/>
                                     <XAxis dataKey="term" />
                                     <YAxis domain={[0, 4]} tickCount={9} />
                                     <Tooltip />
                                     <Legend />
-                                    <Line type="monotone" dataKey="CPA" stroke="#1976d2" dot strokeWidth={2} />
-                                </LineChart>
-                                </ResponsiveContainer>
-                            </div>
+                                    <Area type="monotone" dataKey="GPA" stroke="none" fill="url(#gpaGradient)" />
+                                    <Line type="monotone" dataKey="GPA" stroke="#d32f2f" dot strokeWidth={2} fill="url(#gpaGradient)"/>
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        <div className="w-full md:w-[48%] h-64 bg-white p-4">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={sortedData.map(d => ({
+                                    term: d.hockihoc,
+                                    CPA: parseFloat(d.cpa),
+                                }))}>
+                                    <defs>
+                                        <linearGradient id="cpaGradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stopColor="#1976d2" stopOpacity={0.5} />
+                                            <stop offset="100%" stopColor="#1976d2" stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" strokeWidth={1.2} />
+                                    <XAxis dataKey="term" />
+                                    <YAxis domain={[0, 4]} tickCount={9} />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Area type="monotone" dataKey="CPA" stroke="none" fill="url(#cpaGradient)" />
+                                    <Line type="monotone" dataKey="CPA" stroke="#1976d2" dot strokeWidth={2} fill="url(#cpaGradient)" />
+                                </AreaChart>
+                            </ResponsiveContainer>
                         </div>
                     </div>
 
                     <div className="flex flex-wrap gap-4">
-                        <div className="w-full md:w-[48%] h-64 bg-white p-4 rounded shadow">
+                        <div className="w-full md:w-[48%] h-64 bg-white p-4">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={data}>
+                                <BarChart data={sortedData}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="hockihoc" />
                                 <YAxis />
@@ -153,9 +164,9 @@ export default function StudentGPACPA() {
                                 </BarChart>
                             </ResponsiveContainer>
                         </div>
-                        <div className="w-full md:w-[48%] h-64 bg-white p-4 rounded shadow">
+                        <div className="w-full md:w-[48%] h-64 bg-white p-4">
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={data}>
+                                <BarChart data={sortedData}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="hockihoc" />
                                 <YAxis />

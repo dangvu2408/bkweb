@@ -84,21 +84,21 @@ export default function LoginForm() {
 
     return (
         <div className='relative z-10 flex items-center justify-center h-screen'>
-        <div className='bg-[#AA1D2B] bg-opacity-90 rounded-[15px] p-8 shadow-lg w-full max-w-md'>
-            <h1 className='text-2xl font-bold text-center mb-6 text-white'>Đăng nhập</h1>
-            <form onSubmit={handleLogin} className="space-y-4 flex flex-col items-center">
-                <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Mã số sinh viên" className="w-full px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none" />
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Mật khẩu" className="w-full px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none" />
-                <input value={captcha} onChange={(e) => setCaptcha(e.target.value)} placeholder="Nhập CAPTCHA" className="w-full px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none" />
-                {captchaUrl && (
-                    <img src={captchaUrl} alt="captcha" className="w-[200px] h-[80px] border rounded cursor-pointer hover:opacity-80" onClick={fetchCaptcha} title="Click để reload CAPTCHA" />
-                )}
-                <button type="submit" disabled={loading} className="w-full bg-white text-[#AA1D2B] py-2 rounded-[8px] cursor-pointer">
-                    {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
-                </button>
-                {message && <p className='text-white text-sm text-center'>{message}</p>}
-            </form>
-        </div>
+            <div className='bg-[#AA1D2B] bg-opacity-90 rounded-[15px] p-8 shadow-lg w-full max-w-md'>
+                <h1 className='text-2xl font-bold text-center mb-6 text-white'>Đăng nhập</h1>
+                <form onSubmit={handleLogin} className="space-y-4 flex flex-col items-center">
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Mã số sinh viên" className="w-full px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none" />
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Mật khẩu" className="w-full px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none" />
+                    <input value={captcha} onChange={(e) => setCaptcha(e.target.value)} placeholder="Nhập CAPTCHA" className="w-full px-4 py-2 border border-gray-300 rounded-[8px] focus:outline-none" />
+                    {captchaUrl && (
+                        <img src={captchaUrl} alt="captcha" className="w-[200px] h-[80px] border rounded cursor-pointer hover:opacity-80" onClick={fetchCaptcha} title="Click để reload CAPTCHA" />
+                    )}
+                    <button type="submit" disabled={loading} className="w-full bg-white text-[#AA1D2B] py-2 rounded-[8px] cursor-pointer">
+                        {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+                    </button>
+                    {message && <p className='text-white text-sm text-center'>{message}</p>}
+                </form>
+            </div>
         </div>
     );
 }
