@@ -24,40 +24,49 @@ export default function Timetable() {
 
     useEffect(() => {
         const sessionId = localStorage.getItem('sessionId');
-        if (!sessionId) return;
-
-        const cached = localStorage.getItem('timetable_cache');
-        if (cached) {
-            const { data, time } = JSON.parse(cached);
-            if (Date.now() - time < 10 * 60 * 1000) {
-                setData(data);
-                setLoading(false);
-                return;
+        
+        const cachedStr = localStorage.getItem('timetable_cache');
+        if (cachedStr) {
+            try {
+                const parsed = JSON.parse(cachedStr);
+                const cachedData = Array.isArray(parsed) ? parsed : parsed.data; // lấy mảng thực
+                if (Array.isArray(cachedData)) {
+                    setData(cachedData);
+                    setLoading(false);
+                }
+            } catch {
+                console.error('Cache bị lỗi, xóa cache');
+                localStorage.removeItem('timetable_cache');
             }
         }
 
-        fetch('/api/timetable', {
-            method: 'POST',
-            body: JSON.stringify({ sessionId }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                if (json.success) {
-                    setData(json.data);
-                    localStorage.setItem('term_cache', JSON.stringify({
-                        data: json.data,
-                        time: Date.now()
-                    }));
-                } else {
-                    console.error('API trả về lỗi:', json.message);
-                }
+        if (sessionId) { 
+            fetch('/api/timetable', {
+                method: 'POST',
+                body: JSON.stringify({ sessionId }),
+                headers: { 'Content-Type': 'application/json' },
             })
-            .catch((err) => console.error('Lỗi:', err))
-            .finally(() => setLoading(false));
+                .then((res) => res.json())
+                .then((json) => {
+                    if (json.success) {
+                        setData(json.data);
+                        localStorage.setItem('term_cache', JSON.stringify({
+                            data: json.data,
+                        }));
+                    } else {
+                        console.error('API trả về lỗi:', json.message);
+                    }
+                })
+                .catch((err) => console.error('Lỗi:', err))
+                .finally(() => setLoading(false));
+        } else {
+            setLoading(false);
+        }
+
+        
     }, []);
 
-    if (loading) return <div>Đang tải thời khóa biểu...</div>;
+    if (loading) return <div>Đang tải...</div>;
 
     return (
 

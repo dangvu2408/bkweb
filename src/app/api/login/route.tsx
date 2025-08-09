@@ -167,6 +167,8 @@ export async function POST(req: NextRequest) {
             const getText = (id: string) => $(`#${id}`).text().trim();
             const text1 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo1').split(':');
             const text2 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo2').split(':');
+            const text3 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo3').split(':');
+            const text4 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo4').split(':');
             const text5 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo5').split(':');
             const text6 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo6').split(':');
 
@@ -184,6 +186,14 @@ export async function POST(req: NextRequest) {
                 Lop: text2[2]?.trim().substring(0, text2[2].length - 10),
                 Khoa: text2[3]?.trim().substring(0, text2[3].length - 7),
                 Email: text2[4]?.trim(),
+
+                HK_TK: text3[1]?.trim().substring(0, text3[1].length - 22),
+                CPA: text3[2]?.trim().substring(0, text3[2].length - 26),
+                TC_no: text3[3]?.trim().substring(0, text3[3].length - 23),
+
+                TC_tichluy: text4[1]?.trim().substring(0, text4[1].length - 21),
+                Trinhdo: text4[2]?.trim().substring(0, text4[2].length - 25),
+                Canhbao: text4[3]?.trim().substring(0, text4[3].length - 19),
 
                 Dan_toc: text5[1]?.trim().substring(0, text5[1].length - 14),
                 Nam_tot_nghiep_c3: text5[2]?.trim().substring(0, text5[2].length - 9),
