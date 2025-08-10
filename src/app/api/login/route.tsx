@@ -7,6 +7,18 @@ import iconv from 'iconv-lite';
 import { randomUUID } from 'crypto';
 import crypto from 'crypto';
 
+import { scrapeTuition  } from '../tuition/route';
+import { scrapeStudentGPACPA } from '../aggregatescore/route';
+import { scrapeInputGradeTerm } from '../inputgradeterm/route';
+import { scrapeProgram } from '../program/route';
+import { scrapeCourseRegister } from '../registercourse/route';
+import { scrapeStudentClass } from '../studentclass/route';
+import { scrapeStudentScore } from '../studentscore/route';
+import { scrapeTimetable } from '../timetable/route';
+import { scrapeToeic } from '../toeicscore/route';
+
+
+
 const LOGIN_URL = 'https://ctt-sis.hust.edu.vn/Account/Login.aspx';
 declare global {
     var sessionStore: Record<string, { jar: CookieJar }>;
@@ -217,8 +229,41 @@ export async function POST(req: NextRequest) {
                 Email_me: text6[9]?.trim(),
             };
 
+            const [
+                tuition,
+                gpaCpa,
+                inputGradeTerm,
+                program,
+                courseRegister,
+                studentClass,
+                studentScore,
+                timetable,
+                toeic
+            ] = await Promise.all([
+                scrapeTuition(client),
+                scrapeStudentGPACPA(client),
+                scrapeInputGradeTerm(client),
+                scrapeProgram(client),
+                scrapeCourseRegister(client),
+                scrapeStudentClass(client),
+                scrapeStudentScore(client),
+                scrapeTimetable(client),
+                scrapeToeic(client)
+            ]);
+
             return new NextResponse(
-                JSON.stringify({ success: true, sessionId, data }),
+                JSON.stringify({ success: true, sessionId, data: {
+                    data,
+                    tuition,
+                    gpaCpa,
+                    inputGradeTerm,
+                    program,
+                    courseRegister,
+                    studentClass,
+                    studentScore,
+                    timetable,
+                    toeic
+                } }),
                 {
                     status: 200,
                     headers: {
@@ -228,5 +273,7 @@ export async function POST(req: NextRequest) {
             );
         }
     }
+
+    
     return NextResponse.json({ success: false, message: 'Đăng nhập thất bại' }, { status: 401 });
 }

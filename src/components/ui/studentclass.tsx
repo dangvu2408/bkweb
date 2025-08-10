@@ -15,50 +15,13 @@ interface studentclass {
 
 export default function StudentClass() {
     const [data, setData] = useState<studentclass[]>([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const sessionId = localStorage.getItem('sessionId');
-
-        const cachedStr = localStorage.getItem('class_cache');
-        if (cachedStr) {
-            try {
-                const parsed = JSON.parse(cachedStr);
-                const cachedData = Array.isArray(parsed) ? parsed : parsed.data; // lấy mảng thực
-                if (Array.isArray(cachedData)) {
-                    setData(cachedData);
-                    setLoading(false);
-                }
-            } catch {
-                console.error('Cache bị lỗi, xóa cache');
-                localStorage.removeItem('class_cache');
-            }
-        }
-
-        if (sessionId) {
-            fetch('/api/studentclass', {
-                method: 'POST',
-                body: JSON.stringify({ sessionId }),
-                headers: { 'Content-Type': 'application/json' },
-            })
-                .then(res => res.json())
-                .then(json => {
-                    if (json.success) {
-                        setData(json.data);
-                        localStorage.setItem('class_cache', JSON.stringify(json.data));
-                    } else {
-                        console.error('API trả về lỗi:', json.message);
-                    }
-                })
-                .catch(err => console.error('Lỗi lấy lớp:', err))
-                .finally(() => setLoading(false));
-        } else {
-            setLoading(false);
+        const data = localStorage.getItem('studentClass');
+        if (data) {
+            setData(JSON.parse(data));
         }
     }, []);
-
-
-    if (loading) return <div>Đang tải lớp...</div>;
 
     return (
 

@@ -24,56 +24,15 @@ interface StudentGPACPA {
 
 export default function StudentGPACPA() {
     const [data, setData] = useState<StudentGPACPA[]>([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const sessionId = localStorage.getItem('sessionId');
-        
-        const cachedStr = localStorage.getItem('aggregatescore_cache');
-        if (cachedStr) {
-            try {
-                const parsed = JSON.parse(cachedStr);
-                const cachedData = Array.isArray(parsed) ? parsed : parsed.data; // lấy mảng thực
-                if (Array.isArray(cachedData)) {
-                    setData(cachedData);
-                    setLoading(false);
-                }
-            } catch {
-                console.error('Cache bị lỗi, xóa cache');
-                localStorage.removeItem('aggregatescore_cache');
-            }
+        const data = localStorage.getItem('gpaCpa');
+        if (data) {
+            setData(JSON.parse(data));
         }
-
-        if (sessionId) { 
-            fetch('/api/aggregatescore', {
-                method: 'POST',
-                body: JSON.stringify({ sessionId }),
-                headers: { 'Content-Type': 'application/json' },
-            })
-                .then((res) => res.json())
-                .then((json) => {
-                    if (json.success) {
-                        setData(json.data);
-                        localStorage.setItem('aggregatescore_cache', JSON.stringify({
-                            data: json.data,
-                        }));
-                    } else {
-                        console.error('API trả về lỗi:', json.message);
-                    }
-                })
-                .catch((err) => console.error('Lỗi lấy:', err))
-                .finally(() => setLoading(false));
-        } else {
-            setLoading(false);
-        }
-
-        
     }, []);
 
     const sortedData = [...data].sort((a, b) => a.hockihoc.localeCompare(b.hockihoc));
-
-    if (loading) return <div>Đang tải ...</div>;
-
     return (
 
         <div className="w-full flex flex-col gap-[10px] text-[#32323d] pb-[10px]">
@@ -112,7 +71,6 @@ export default function StudentGPACPA() {
             {sortedData.length > 0 && (
                 <div className='flex flex-col gap-4 mt-6'>
                     <h2 className="text-center [font-family:'Poppin_Bold'] text-lg mb-2">PHÂN TÍCH KẾT QUẢ HỌC TẬP</h2>
-
                     <div className="flex flex-wrap gap-4">
                         <div className="w-full md:w-[48%] h-64 bg-white p-4">
                             <ResponsiveContainer width="100%" height="100%">

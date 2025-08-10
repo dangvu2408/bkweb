@@ -1,3 +1,4 @@
+// /app/api/student-score/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { wrapper } from 'axios-cookiejar-support';
 import { CookieJar } from 'tough-cookie';
@@ -11,10 +12,41 @@ declare global {
 }
 globalThis.sessionStore = globalThis.sessionStore || {};
 
+export async function scrapeStudentScore(client: ReturnType<typeof wrapper>) {
+    const response = await client.get(STUDENT_SCORE_URL, { responseType: 'arraybuffer' });
+    const html = Buffer.from(response.data).toString('utf-8');
+    const $ = cheerio.load(html);
+
+    if (
+        html.includes('ctl00_ctl00_contentPane_MainPanel_MainContent_tbUserName_I') ||
+        html.includes('ctl00_ctl00_contentPane_MainPanel_MainContent_tbPassword_I')
+    ) {
+        throw new Error('Session hết hạn');
+    }
+
+    const rows = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_gvCourseMarks .dxgvDataRow');
+    const scores: any[] = [];
+
+    rows.each((_, row) => {
+        const columns = $(row).find('td.dx-nowrap');
+        scores.push({
+            HocKi: $(columns[0]).text().trim(),
+            MaHocPhan: $(columns[1]).text().trim(),
+            TenHocPhan: $(columns[2]).text().trim(),
+            TinChi: $(columns[3]).text().trim(),
+            LopHoc: $(columns[4]).text().trim(),
+            diemQT: $(columns[5]).text().trim(),
+            diemThi: $(columns[6]).text().trim(),
+            diemChu: $(columns[7]).text().trim(),
+        });
+    });
+
+    return scores;
+}
+
 export async function POST(req: NextRequest) {
     try {
-        const { sessionId } = await req.json(); 
-        
+        const { sessionId } = await req.json();
         const jar = globalThis.sessionStore[sessionId]?.jar;
 
         if (!jar) {
@@ -22,37 +54,9 @@ export async function POST(req: NextRequest) {
         }
 
         const client = wrapper(axios.create({ jar }));
+        const data = await scrapeStudentScore(client);
 
-        const response = await client.get(STUDENT_SCORE_URL, {
-            responseType: 'arraybuffer',
-        });
-
-        const html = Buffer.from(response.data).toString('utf-8');
-        const $ = cheerio.load(html);
-
-        if (html.includes('ctl00_ctl00_contentPane_MainPanel_MainContent_tbUserName_I') || html.includes('ctl00_ctl00_contentPane_MainPanel_MainContent_tbPassword_I')) {
-            return NextResponse.json({ success: false, message: 'Session hết hạn' }, { status: 401 });
-        }
-
-        const rows = $('#ctl00_ctl00_contentPane_MainPanel_MainContent_gvCourseMarks .dxgvDataRow');
-        const studentclass: any[] = [];
-
-        rows.each((_, row) => {
-            const columns = $(row).find('td.dx-nowrap');
-
-            studentclass.push({
-                HocKi: $(columns[0]).text().trim(),
-                MaHocPhan: $(columns[1]).text().trim(),
-                TenHocPhan: $(columns[2]).text().trim(),
-                TinChi: $(columns[3]).text().trim(),
-                LopHoc: $(columns[4]).text().trim(),
-                diemQT: $(columns[5]).text().trim(),
-                diemThi: $(columns[6]).text().trim(),
-                diemChu: $(columns[7]).text().trim(),
-            });
-        });
-
-        return NextResponse.json({ success: true, data: studentclass });
+        return NextResponse.json({ success: true, data });
     } catch (err) {
         console.error(err);
         return NextResponse.json({ success: false, message: 'Lỗi khi lấy info' }, { status: 500 });

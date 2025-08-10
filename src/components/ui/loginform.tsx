@@ -74,8 +74,19 @@ export default function LoginForm() {
         if (data.success) {
             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
-            localStorage.setItem('studentInfo', JSON.stringify(data.data));
+            localStorage.setItem('studentInfo', JSON.stringify(data.data.data));
+            localStorage.setItem('tuition', JSON.stringify(data.data.tuition));
+            localStorage.setItem('gpaCpa', JSON.stringify(data.data.gpaCpa));
+            localStorage.setItem('inputGradeTerm', JSON.stringify(data.data.inputGradeTerm));
+            localStorage.setItem('program', JSON.stringify(data.data.program));
+            localStorage.setItem('courseRegister', JSON.stringify(data.data.courseRegister));
+            localStorage.setItem('studentClass', JSON.stringify(data.data.studentClass));
+            localStorage.setItem('studentScore', JSON.stringify(data.data.studentScore));
+            localStorage.setItem('timetable', JSON.stringify(data.data.timetable));
+            localStorage.setItem('toeic', JSON.stringify(data.data.toeic));
+
             localStorage.setItem('sessionId', data.sessionId);
+
             router.push('/student-info');
         } else {
             fetchCaptcha();

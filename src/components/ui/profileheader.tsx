@@ -8,7 +8,7 @@ interface field {
 export default function profileheader({ fullname, mssv }: field) {
     return(
         <div className="flex flex-row gap-[20px] items-center self-center">
-            <div className="flex flex-col text-right">
+            <div className="flex flex-col text-right text-[14px]">
                 <span className="text-[#000] [font-family:'Poppin_Bold']">{fullname}</span>
                 <span className="text-[#000] [font-family:'Poppin_Bold']">{mssv}</span>
             </div>
