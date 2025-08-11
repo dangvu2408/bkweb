@@ -87,7 +87,7 @@ export default function LoginForm() {
 
             localStorage.setItem('sessionId', data.sessionId);
 
-            router.push('/student-info');
+            router.push('/');
         } else {
             fetchCaptcha();
         }

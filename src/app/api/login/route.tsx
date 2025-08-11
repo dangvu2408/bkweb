@@ -184,6 +184,7 @@ export async function POST(req: NextRequest) {
             const text5 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo5').split(':');
             const text6 = getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo6').split(':');
 
+
             const data = {
                 MSSV: getText('ctl00_ctl00_contentPane_MainPanel_MainContent_lbMSSV').substring(5),
 
@@ -199,13 +200,13 @@ export async function POST(req: NextRequest) {
                 Khoa: text2[3]?.trim().substring(0, text2[3].length - 7),
                 Email: text2[4]?.trim(),
 
-                HK_TK: text3[1]?.trim().substring(0, text3[1].length - 22),
-                CPA: text3[2]?.trim().substring(0, text3[2].length - 26),
-                TC_no: text3[3]?.trim().substring(0, text3[3].length - 23),
+                HK_TK: text3[1]?.trim().substring(0, text3[1].length - 21),
+                Tong_ket_diem: text3[2]?.trim().substring(0, text3[2].length - 18),
+                TC_no: text3[3]?.trim(),
 
-                TC_tichluy: text4[1]?.trim().substring(0, text4[1].length - 21),
-                Trinhdo: text4[2]?.trim().substring(0, text4[2].length - 25),
-                Canhbao: text4[3]?.trim().substring(0, text4[3].length - 19),
+                TC_tichluy: text4[1]?.trim().substring(0, text4[1].length - 20),
+                Trinhdo: text4[2]?.trim().substring(0, text4[2].length - 14),
+                Canhbao: text4[3]?.trim(),
 
                 Dan_toc: text5[1]?.trim().substring(0, text5[1].length - 14),
                 Nam_tot_nghiep_c3: text5[2]?.trim().substring(0, text5[2].length - 9),
