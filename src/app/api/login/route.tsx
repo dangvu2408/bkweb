@@ -16,6 +16,7 @@ import { scrapeStudentClass } from '../studentclass/route';
 import { scrapeStudentScore } from '../studentscore/route';
 import { scrapeTimetable } from '../timetable/route';
 import { scrapeToeic } from '../toeicscore/route';
+import { scrapeTimetableTemp } from '../timetabletemp/route';
 
 
 
@@ -239,7 +240,8 @@ export async function POST(req: NextRequest) {
                 studentClass,
                 studentScore,
                 timetable,
-                toeic
+                toeic,
+                timetabletemp
             ] = await Promise.all([
                 scrapeTuition(client),
                 scrapeStudentGPACPA(client),
@@ -249,7 +251,8 @@ export async function POST(req: NextRequest) {
                 scrapeStudentClass(client),
                 scrapeStudentScore(client),
                 scrapeTimetable(client),
-                scrapeToeic(client)
+                scrapeToeic(client),
+                scrapeTimetableTemp(client)
             ]);
 
             return new NextResponse(
@@ -263,7 +266,8 @@ export async function POST(req: NextRequest) {
                     studentClass,
                     studentScore,
                     timetable,
-                    toeic
+                    toeic,
+                    timetabletemp
                 } }),
                 {
                     status: 200,

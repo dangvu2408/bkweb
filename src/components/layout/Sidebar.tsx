@@ -97,11 +97,11 @@ export default function Sidebar() {
                                 </Link>
                             </li>
 
-                            <li className="text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer">
-                                <a title="Danh sách đồ án" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
+                            <li className={`text-[#32323d] border-l-[3px] hover:bg-[rgba(0,0,0,0.05)] cursor-pointer ${isActive('/timetable-temp')}`}>
+                                <Link href="/timetable-temp" title="Danh sách đồ án" className="flex items-center gap-[10px] text-sm leading-5 font-medium py-[12px] px-[21px]">
                                     <svg role="img" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" aria-labelledby="newsIconTitle" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" color="#000" className="w-[20px]"> <title id="newsIconTitle">News</title> <path d="M22 5L22 17C22 18.3333333 21.3333333 19 20 19 18.6666667 19 18 18.3333333 18 17L18 5 2 5 2 16C2 18 3 19 5 19 7 19 12 19 20 19M6 14L7 14M11 14L14 14M6 10L14 10"/> </svg>
-                                    <span>Danh sách đồ án</span>
-                                </a>
+                                    <span>TKB tạm thời </span>
+                                </Link>
                             </li>
                         </ul>
                     </nav>

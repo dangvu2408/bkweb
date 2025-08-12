@@ -84,6 +84,7 @@ export default function LoginForm() {
             localStorage.setItem('studentScore', JSON.stringify(data.data.studentScore));
             localStorage.setItem('timetable', JSON.stringify(data.data.timetable));
             localStorage.setItem('toeic', JSON.stringify(data.data.toeic));
+            localStorage.setItem('timetabletemp', JSON.stringify(data.data.timetabletemp));
 
             localStorage.setItem('sessionId', data.sessionId);
 
