@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import UniNoti from "../ui/universitynoti";
+import TimetableCalendar from "../ui/calendar";
 
 interface NotificationData {
     title: string;
@@ -21,6 +22,9 @@ export default function MainHome() {
     const [index, setIndex] = useState(0);
     const [transition, setTransition] = useState(true);
     const [studentInfo, setInfo] = useState<any>(null);
+    const [timetable, setTimetable] = useState<any>(null);
+    const [timetableTemp, setTimetableTemp] = useState<any>(null);
+
 
 
     useEffect(() => {
@@ -40,12 +44,28 @@ export default function MainHome() {
         fetchData();
     }, []);
 
+
     useEffect(() => {
         const data = localStorage.getItem('studentInfo');
         if (data) {
             setInfo(JSON.parse(data));
         }
     }, []);
+
+    useEffect(() => {
+        const data = localStorage.getItem('timetable');
+        if (data) {
+            setTimetable(JSON.parse(data));
+        }
+    }, []);
+
+    useEffect(() => {
+        const data = localStorage.getItem('timetabletemp');
+        if (data) {
+            setTimetableTemp(JSON.parse(data));
+        }
+    }, []);
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -90,6 +110,20 @@ export default function MainHome() {
                     ))}
                 </div>
             </div>
+
+            <h1 className="[font-family:'Poppin_Bold'] mb-2 text-xl flex items-center justify-between">
+                Thời khóa biểu{(!timetable || timetable.length === 0) && ' (tạm thời)'}
+                <Link className="[font-family:'Poppin'] flex items-center text-[15px] uppercase" href={(!timetable || timetable.length === 0) ? '/timetable-temp' : '/time-table'}>
+                    Xem thêm
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </Link>
+            </h1>
+
+            <TimetableCalendar/>
+
+
+
+
 
             <h1 className="[font-family:'Poppin_Bold'] mb-2 text-xl flex items-center justify-between">
                 Thông báo đại học
