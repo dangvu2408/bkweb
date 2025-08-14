@@ -49,9 +49,9 @@ export default function TimetableCalendar() {
                     value={value}
                     tileContent={({ date, view }) =>
                         view === "month" && markedDates.includes(formatDate(date)) ? (
-                        <div className="flex justify-center items-center">
-                            <span className="w-2 h-2 rounded-full bg-yellow-400 mt-1"></span>
-                        </div>
+                            <div className="flex justify-center items-center">
+                                <span className="w-2 h-2 rounded-full bg-yellow-400 mt-1"></span>
+                            </div>
                         ) : null
                     }
                 />

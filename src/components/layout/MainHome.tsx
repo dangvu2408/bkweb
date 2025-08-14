@@ -122,9 +122,6 @@ export default function MainHome() {
             <TimetableCalendar/>
 
 
-
-
-
             <h1 className="[font-family:'Poppin_Bold'] mb-2 text-xl flex items-center justify-between">
                 Thông báo đại học
                 <Link className="[font-family:'Poppin'] flex items-center text-[15px] uppercase" href={'https://ctt.hust.edu.vn/DisplayWeb/DisplayListBaiViet?tag=%C4%90T%C4%90H'}>
