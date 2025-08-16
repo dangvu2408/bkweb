@@ -1,1 +1,3 @@
 ## HUST Student Assistant Web (HUSTSA Web version)
+
+Using NextJS, Tailwind... 
