@@ -36,11 +36,11 @@ export default function Header() {
                 </div>
 
                 <div className="flex items-center justify-end flex-grow mr-[10px] basis-auto shrink-0">
-                    <div className="mr-5 px-5 py-[10px] rounded-[100px] bg-red-600 text-white text-[14px] [font-family:'Poppin_Bold'] leading-[20px] tracking-[0.1px] cursor-pointer">Cập nhật dữ liệu</div>
+                    <div className="mr-5 px-5 py-[10px] rounded-[100px] bg-[#CE1628] text-white text-[14px] [font-family:'Poppin_Bold'] leading-[20px] tracking-[0.1px] cursor-pointer">Cập nhật dữ liệu</div>
                     {user ? (
                         <Field fullname={user.Ho_ten} mssv={user.MSSV}></Field>
                     ) : (
-                        <Link href="/login" className="mr-[12px] px-[25px] py-[10px] rounded-full bg-red-600 text-white text-[14px] [font-family:'Poppin_Bold'] leading-[20px] tracking-[0.1px] cursor-pointer">
+                        <Link href="/login" className="mr-[12px] px-[25px] py-[10px] rounded-full bg-[#CE1628] text-white text-[14px] [font-family:'Poppin_Bold'] leading-[20px] tracking-[0.1px] cursor-pointer">
                             Đăng nhập
                         </Link>
                     )}

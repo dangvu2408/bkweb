@@ -12,9 +12,9 @@ interface NotificationData {
 }
 
 const images = [
-  "/images/banner_1.jpg",
-  "/images/banner_2.jpg",
-  "/images/banner_4.jpg",
+    "/images/banner_1.jpg",
+    "/images/banner_2.jpg",
+    "/images/banner_4.jpg",
 ];
 
 export default function MainHome() {
@@ -100,8 +100,8 @@ export default function MainHome() {
     }, [transition]);
 
     return(
-        <div className="flex flex-col gap-[10px] text-[#32323d] w-full ">
-            <div className="overflow-hidden w-full  rounded-[8px]">
+        <div className="flex flex-col gap-[10px] text-[#32323d] w-full">
+            <div className="overflow-hidden w-full rounded-[8px]">
                 <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translate3d(-${index * 100}%, 0, 0)`, }}>
                     {images.map((src, i) => (
                         <div key={i} className="flex-shrink-0 w-full">

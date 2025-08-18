@@ -42,22 +42,18 @@ export default function TimetableCalendar() {
   const formatDate = (date: Date) => date.toISOString().split("T")[0];
 
   return (
-        <div className="flex bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="p-4">
-                <Calendar
-                    onChange={(val) => setValue(val as Date)}
-                    value={value}
-                    tileContent={({ date, view }) =>
-                        view === "month" && markedDates.includes(formatDate(date)) ? (
-                            <div className="flex justify-center items-center">
-                                <span className="w-2 h-2 rounded-full bg-yellow-400 mt-1"></span>
-                            </div>
-                        ) : null
-                    }
-                />
-            </div>
+        <div className="flex ">
+            <Calendar
+                onChange={(val) => setValue(val as Date)}
+                value={value}
+                tileContent={({ date, view }) =>
+                    view === "month" && markedDates.includes(formatDate(date)) ? (
+                        <div className="react-calendar__tile--has-lesson"></div>
+                    ) : null
+                }
+            />
 
-            <div className="flex-1 bg-[#F5FAFF] p-4">
+            <div className="flex-1 p-4">
                 <h2 className="text-lg font-bold mb-4">Thông tin chi tiết</h2>
                 {lessons[formatDate(value as Date)] ? (
                 <div className="flex flex-col gap-4">
