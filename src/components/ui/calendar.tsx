@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { format } from "date-fns";
+import { vi } from "date-fns/locale";
 
 interface Lesson {
   id: string;
@@ -51,17 +53,17 @@ export default function TimetableCalendar() {
                         <div className="react-calendar__tile--has-lesson"></div>
                     ) : null
                 }
+                formatMonthYear={(locale, date) =>
+                    format(date, "MMMM, yyyy", { locale: vi }) // "tháng 9, 2025"
+                }
             />
 
-            <div className="flex-1 p-4">
-                <h2 className="text-lg font-bold mb-4">Thông tin chi tiết</h2>
+            <div className="flex-1 p-[20px]">
+                <h2 className="text-[20px] [font-family:'Poppin_Bold'] mb-4 text-center">Thông tin chi tiết</h2>
                 {lessons[formatDate(value as Date)] ? (
                 <div className="flex flex-col gap-4">
                     {lessons[formatDate(value as Date)].map((lesson) => (
-                        <div
-                            key={lesson.id}
-                            className="bg-white p-4 rounded-lg shadow-sm flex flex-col"
-                        >
+                        <div key={lesson.id} className="bg-white p-4 rounded-lg shadow-sm flex flex-col">
                             <div className="flex gap-4">
                                 <div className="flex flex-col items-center text-gray-600 font-semibold">
                                     <span>{lesson.start}</span>
