@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import UniNoti from "../ui/universitynoti";
-import TimetableCalendar from "../ui/calendar";
+import TimetableCalendarTemp from "../ui/calendartemp";
 
 interface NotificationData {
     title: string;
@@ -119,7 +119,7 @@ export default function MainHome() {
                 </Link>
             </h1>
 
-            <TimetableCalendar/>
+            <TimetableCalendarTemp/>
 
 
             <h1 className="[font-family:'Poppin_Bold'] mb-2 text-xl flex items-center justify-between">
