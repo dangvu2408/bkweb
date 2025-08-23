@@ -90,7 +90,19 @@ export default function Header() {
         setMessage(data.message || '');
 
         if (data.success) {
+            localStorage.setItem('studentInfo', JSON.stringify(data.data.data));
+            localStorage.setItem('tuition', JSON.stringify(data.data.tuition));
+            localStorage.setItem('gpaCpa', JSON.stringify(data.data.gpaCpa));
+            localStorage.setItem('inputGradeTerm', JSON.stringify(data.data.inputGradeTerm));
+            localStorage.setItem('program', JSON.stringify(data.data.program));
+            localStorage.setItem('courseRegister', JSON.stringify(data.data.courseRegister));
+            localStorage.setItem('studentClass', JSON.stringify(data.data.studentClass));
+            localStorage.setItem('studentScore', JSON.stringify(data.data.studentScore));
+            localStorage.setItem('timetable', JSON.stringify(data.data.timetable));
+            localStorage.setItem('toeic', JSON.stringify(data.data.toeic));
+            localStorage.setItem('timetabletemp', JSON.stringify(data.data.timetabletemp));
             localStorage.setItem('sessionId', data.sessionId);
+
             const now = new Date().toLocaleString("vi-VN");
             localStorage.setItem("lastUpdated", now);
             setLastUpdated(now);
@@ -130,7 +142,7 @@ export default function Header() {
                         <>
                             <div onClick={() => setIsOpenDialog(true)} className="mr-5 px-5 py-[10px] rounded-[100px] bg-[#CE1628] text-white text-[14px] [font-family:'Poppin_Bold'] leading-[20px] tracking-[0.1px] cursor-pointer">Cập nhật dữ liệu</div>
                             <Transition appear show={isOpenDialog}>
-                                <Dialog as="div" className="relative z-100" onClose={() => setIsOpenDialog(false)}>
+                                <Dialog as="div" className="relative z-1000" onClose={() => setIsOpenDialog(false)}>
                                     <div className="fixed inset-0 bg-black/30" />
                                     <div className="fixed inset-0 flex items-center justify-center">
                                         <Dialog.Panel className="w-full max-w-sm rounded-xl bg-white p-[18px] shadow-xl">
