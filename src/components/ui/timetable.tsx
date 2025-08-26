@@ -1,6 +1,7 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
 
 interface TKB {
     Thoi_gian: string;
@@ -27,7 +28,7 @@ export default function Timetable() {
             setData(JSON.parse(data));
         }
     }, []);
-
+    if (!data) return <Notifi/>;
 
     return (
 

@@ -1,6 +1,7 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
 
 interface TOEIC {
     maSV: string;
@@ -25,6 +26,7 @@ export default function TOEICScore() {
             setData(JSON.parse(data));
         }
     }, []);
+    if (!data) return <Notifi/>;
 
 
     return (

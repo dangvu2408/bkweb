@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import GaugeComponent from "react-gauge-component";
+import Notifi from './notification';
 
 interface studentscore {
     HocKi: string;
@@ -57,6 +58,7 @@ export default function StudentScore() {
             setDataTC(JSON.parse(data));
         } 
     }, []);
+    if (!data || !dataTC) return <Notifi/>;
 
     const gradeCounts: Record<string, number> = {};
     data.forEach((item) => {

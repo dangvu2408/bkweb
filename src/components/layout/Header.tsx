@@ -168,7 +168,7 @@ export default function Header() {
                                             </form>
 
                                             <div className="[font-family:'Poppin_Italic']">
-                                                Lần cập nhật gần đây nhất: {lastUpdated ? lastUpdated : 'Chưa có'}
+                                                Lần cập nhật gần đây nhất: {lastUpdated ? lastUpdated : 'Chưa cập nhật sau lần đăng nhập gần nhất'}
                                             </div>
                                         </Dialog.Panel>
                                     </div>

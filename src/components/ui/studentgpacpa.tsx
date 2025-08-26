@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import {
     AreaChart, BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Area
 } from 'recharts';
+import Notifi from './notification';
 
 interface StudentGPACPA {
     hockihoc: string;
@@ -31,6 +32,7 @@ export default function StudentGPACPA() {
             setData(JSON.parse(data));
         }
     }, []);
+    if (!data) return <Notifi/>;
 
     const sortedData = [...data].sort((a, b) => a.hockihoc.localeCompare(b.hockihoc));
     return (

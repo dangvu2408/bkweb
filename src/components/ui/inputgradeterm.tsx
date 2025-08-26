@@ -1,6 +1,7 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
 
 interface InputGradeTerm {
     masinhvien: string;
@@ -22,6 +23,9 @@ export default function StudentClass() {
             setData(JSON.parse(data));
         }
     }, []);
+       
+    if (!data) return <Notifi/>;
+    
 
     return (
 

@@ -1,6 +1,7 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
 
 interface studentclass {
     maSV: string;
@@ -22,7 +23,7 @@ export default function StudentClass() {
             setData(JSON.parse(data));
         }
     }, []);
-
+    if (!data) return <Notifi/>;
     return (
 
         <div className="w-full flex flex-col gap-[10px] text-[#32323d] pb-[10px]">

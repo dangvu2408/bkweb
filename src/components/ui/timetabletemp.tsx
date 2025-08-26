@@ -1,6 +1,7 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
 
 interface TimetableClass {
     Ma_lop: string;
@@ -35,7 +36,7 @@ export default function TimetableTemp() {
             setTimetableTime(parsed.timetable_time || []);
         }
     }, []);
-
+    if (!timetable || !timetableTime) return <Notifi/>;
     return (
 
         <div className="w-full flex flex-col gap-[10px] text-[#32323d] pb-[10px]">

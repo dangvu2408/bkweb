@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
 
 interface HocPhanHP {
     maHocPhanHP: string;
@@ -29,6 +30,7 @@ export default function TuitionPage() {
             setData(JSON.parse(data));
         }
     }, []);
+    if (!dataRes) return <Notifi/>;
 
 
     return (

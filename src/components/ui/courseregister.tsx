@@ -1,6 +1,8 @@
 'use client'; 
 
 import { useEffect, useState } from 'react';
+import Notifi from './notification';
+
 
 interface CourseRegister {
     maHPDK: string;
@@ -28,6 +30,8 @@ export default function StudentClass() {
         }
     }, []);
 
+    if (!dataRes) return <Notifi/>;
+
 
     return (
         <div className="w-full flex flex-col gap-[10px] text-[#32323d] pb-[10px]">
@@ -37,13 +41,13 @@ export default function StudentClass() {
                     <span>Bảng đăng ký học phần kỳ {dataRes.thongtinHK} của sinh viên</span>
                     <table className="min-w-full border border-gray-300 text-sm">
                         <thead className="bg-[#E0ECFF]">
-                        <tr>
-                            <th className="border px-2 py-1">Mã HPDK</th>
-                            <th className="border px-2 py-1">Tên HPDK</th>
-                            <th className="border px-2 py-1">Ngày đăng kí</th>
-                            <th className="border px-2 py-1">Trạng thái DK</th>
-                            <th className="border px-2 py-1">Số TC DK</th>
-                        </tr>
+                            <tr>
+                                <th className="border px-2 py-1">Mã HPDK</th>
+                                <th className="border px-2 py-1">Tên HPDK</th>
+                                <th className="border px-2 py-1">Ngày đăng kí</th>
+                                <th className="border px-2 py-1">Trạng thái DK</th>
+                                <th className="border px-2 py-1">Số TC DK</th>
+                            </tr>
                         </thead>
                         <tbody>
                         {dataRes.thongtinDK.map((stdterm, idx) => (
