@@ -13,7 +13,6 @@ HUST Student Assistant là hệ thống quản lý dữ liệu học tập của
 - Hiển thị các dữ liệu học tập của sinh viên.
 - Phân tích điểm học tập bằng biểu đồ.
 - Hiển thị thông báo mới nhất từ Đại học.
-- Commit cho đỡ mất streak.
 
 <img src="./public/images/readme1.png">
 <p align="center"><i>Giao diện một phần của màn hình trang chủ</i></p>
